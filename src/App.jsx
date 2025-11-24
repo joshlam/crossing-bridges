@@ -106,10 +106,10 @@ const App = () => {
               className="flex-shrink-0 flex items-center cursor-pointer"
               onClick={() => scrollToSection("home")}
             >
-              <span className="text-2xl font-serif font-bold text-amber-600 tracking-wide">
+              <span className="text-xl md:text-2xl font-serif font-bold text-amber-600 tracking-wide">
                 CROSSING BRIDGES
               </span>
-              <span className="ml-2 text-sm font-light text-slate-500 hidden sm:block">
+              <span className="ml-2 text-xs md:text-sm font-light text-slate-500 block">
                 WITH JESUS
               </span>
             </div>
