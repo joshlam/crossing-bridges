@@ -70,6 +70,36 @@ const App = () => {
       desc: "Christmas joy for the orphans.",
       img: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=800&auto=format&fit=crop",
     },
+    {
+      date: "March 29, 2025",
+      title: "Spring Mission Trip",
+      desc: "Continued our service in the new year.",
+      img: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=800&auto=format&fit=crop",
+    },
+    {
+      date: "May 17, 2025",
+      title: "May Mission Trip",
+      desc: "Served with love and compassion.",
+      img: "https://images.unsplash.com/photo-1593113630400-ea4288922497?q=80&w=800&auto=format&fit=crop",
+    },
+    {
+      date: "July 26, 2025",
+      title: "Summer Mission Trip",
+      desc: "Reached out to the children during summer break.",
+      img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
+    },
+    {
+      date: "November 15, 2025",
+      title: "Thanksgiving Mission",
+      desc: "Gave thanks and blessed the children for the holidays.",
+      img: "https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop",
+    },
+    {
+      date: "December 20, 2025",
+      title: "Upcoming Christmas Mission",
+      desc: "Bringing the joy of Christmas to the children.",
+      img: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=800&auto=format&fit=crop",
+    },
   ];
 
   const values = [
@@ -107,10 +137,7 @@ const App = () => {
               onClick={() => scrollToSection("home")}
             >
               <span className="text-xl md:text-2xl font-serif font-bold text-amber-600 tracking-wide">
-                CROSSING BRIDGES
-              </span>
-              <span className="ml-2 text-xs md:text-sm font-light text-slate-500 block">
-                WITH JESUS
+                CROSSING BRIDGES WITH JESUS
               </span>
             </div>
 
@@ -361,12 +388,27 @@ const App = () => {
 
             {/* Card 2 */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 group">
-              <div className="h-48 overflow-hidden">
+              <div className="h-48 overflow-hidden bg-slate-200 relative">
+                {/* NOTE: I am using a placeholder image here because I cannot access your local files in this preview.
+                    
+                    TO USE YOUR REAL PHOTO:
+                    1. Save your photo as "worship.jpg" inside the "public" folder of your project.
+                    2. Change the src below to: src="/worship.jpg"
+                 */}
                 <img
-                  src="https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop"
-                  alt="Worship"
+                  src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=800&auto=format&fit=crop"
+                  alt="Worship - Bible"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    // If the image fails, hide it and show the fallback text below
+                    e.target.style.display = "none";
+                    e.target.nextSibling.style.display = "flex";
+                  }}
                 />
+                {/* Fallback Display (Visible only if image breaks) */}
+                <div className="hidden absolute inset-0 w-full h-full items-center justify-center bg-slate-100 text-slate-400">
+                  <span className="text-sm font-medium">Worship Image</span>
+                </div>
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-3 text-amber-600">
@@ -387,12 +429,27 @@ const App = () => {
 
             {/* Card 3 */}
             <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 group">
-              <div className="h-48 overflow-hidden">
+              <div className="h-48 overflow-hidden bg-slate-200 relative">
+                {/* NOTE: I am using a placeholder image here because I cannot access your local files in this preview.
+                    
+                    TO USE YOUR REAL PHOTO:
+                    1. Save your photo as "gifts.jpg" inside the "public" folder of your project.
+                    2. Change the src below to: src="/gifts.jpg"
+                 */}
                 <img
-                  src="https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?q=80&w=800&auto=format&fit=crop"
-                  alt="Gifts"
+                  src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=800&auto=format&fit=crop"
+                  alt="Gifts and crafts on a table"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    // If the image fails, hide it and show the fallback text below
+                    e.target.style.display = "none";
+                    e.target.nextSibling.style.display = "flex";
+                  }}
                 />
+                {/* Fallback Display (Visible only if image breaks) */}
+                <div className="hidden absolute inset-0 w-full h-full items-center justify-center bg-slate-100 text-slate-400">
+                  <span className="text-sm font-medium">Gifts Image</span>
+                </div>
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-3 text-amber-600">
@@ -419,9 +476,11 @@ const App = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-800">
-              Our Journey So Far
+              Our Journey & Upcoming Trips
             </h2>
-            <p className="text-slate-500 mt-2">2024 Mission Highlights</p>
+            <p className="text-slate-500 mt-2">
+              Mission Highlights & Future Dates
+            </p>
           </div>
 
           <div className="relative">
@@ -527,7 +586,9 @@ const App = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-lg">Upcoming Mission</h4>
-                    <p className="text-slate-300">Next Trip to TJ: TBD 2025</p>
+                    <p className="text-slate-300">
+                      Next Trip to TJ: December 20, 2025
+                    </p>
                     <button className="mt-2 text-amber-400 hover:text-amber-300 text-sm font-semibold flex items-center gap-1">
                       View Calendar <ArrowRight size={14} />
                     </button>
@@ -538,7 +599,9 @@ const App = () => {
               <div className="mt-10">
                 <h4 className="font-bold text-lg mb-4">Follow Us</h4>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/crossingbridgeswjesus/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#166fe5] text-white px-4 py-2 rounded-lg transition-colors"
                 >
                   <span className="font-bold">f</span> Jazmin Aguilar-Crossing
@@ -593,13 +656,46 @@ const App = () => {
                 <p className="text-center text-sm font-semibold text-slate-500 mb-3">
                   Support the Mission
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <button className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 py-2 rounded-lg text-sm font-medium text-slate-700 transition-colors">
-                    Zelle
-                  </button>
-                  <button className="flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 py-2 rounded-lg text-sm font-medium text-slate-700 transition-colors">
-                    Venmo
-                  </button>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {/* Zelle (Display Only) */}
+                  <div className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors group">
+                    <span className="text-xs font-bold text-amber-600 uppercase tracking-wider mb-1">
+                      Zelle
+                    </span>
+                    <span className="font-medium text-slate-800 group-hover:text-amber-600 transition-colors select-all text-sm lg:text-base">
+                      470-484-0033
+                    </span>
+                  </div>
+
+                  {/* Venmo Link */}
+                  <a
+                    href="https://venmo.com/Demetree-Fraley"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer group"
+                  >
+                    <span className="text-xs font-bold text-blue-500 uppercase tracking-wider mb-1">
+                      Venmo
+                    </span>
+                    <span className="font-medium text-slate-800 group-hover:text-blue-500 transition-colors select-all text-sm lg:text-base text-center">
+                      Demetree-Fraley
+                    </span>
+                  </a>
+
+                  {/* Cash App Link */}
+                  <a
+                    href="https://cash.app/$DemetreeFraley"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer group"
+                  >
+                    <span className="text-xs font-bold text-green-600 uppercase tracking-wider mb-1">
+                      Cash App
+                    </span>
+                    <span className="font-medium text-slate-800 group-hover:text-green-600 transition-colors text-sm lg:text-base">
+                      $DemetreeFraley
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
