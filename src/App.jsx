@@ -13,11 +13,13 @@ import {
   Music,
   HandHeart,
   ArrowRight,
+  Camera,
 } from "lucide-react";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [selectedTrip, setSelectedTrip] = useState(null);
 
   // Contact Form State
   const [formData, setFormData] = useState({
@@ -26,6 +28,11 @@ const App = () => {
     message: "",
   });
   const [formStatus, setFormStatus] = useState("");
+
+  // Set tab title
+  useEffect(() => {
+    document.title = "Crossing Bridges with Jesus";
+  }, []);
 
   // Smooth scroll handler
   const scrollToSection = (id) => {
@@ -85,6 +92,13 @@ const App = () => {
     { id: "contact", label: "Get Involved" },
   ];
 
+  // Helper to generate placeholder gallery images (Replace these with real URLs in production)
+  const generateGallery = (baseImg, count = 4) => {
+    return Array(count)
+      .fill(baseImg)
+      .map((img, i) => `${img}&gallery_idx=${i}`);
+  };
+
   // Data from Flyer
   const pastTrips = [
     {
@@ -92,60 +106,96 @@ const App = () => {
       title: "The First Crossing",
       desc: "Our ministry came alive! Launching with obedience to God's calling.",
       img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1594708767771-a7502209ff51?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "August 24, 2024",
       title: "2nd Mission Trip",
       desc: "Back to school blessings and continued support.",
       img: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "October 12, 2024",
       title: "3rd Mission Trip",
       desc: "Deepening connections and sharing the Word.",
       img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "November 9, 2024",
       title: "4th Mission Trip",
       desc: "Thanksgiving preparations and gratitude.",
       img: "https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "December 21, 2024",
       title: "5th Trip to TJ",
       desc: "Christmas joy for the orphans.",
       img: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "March 29, 2025",
       title: "Spring Mission Trip",
       desc: "Continued our service in the new year.",
       img: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1594708767771-a7502209ff51?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "May 17, 2025",
       title: "May Mission Trip",
       desc: "Served with love and compassion.",
       img: "https://images.unsplash.com/photo-1593113630400-ea4288922497?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1593113630400-ea4288922497?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "July 26, 2025",
       title: "Summer Mission Trip",
       desc: "Reached out to the children during summer break.",
       img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "November 15, 2025",
       title: "Thanksgiving Mission",
       desc: "Gave thanks and blessed the children for the holidays.",
       img: "https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1511632765486-a01980968a0c?q=80&w=800&auto=format&fit=crop",
+      ],
     },
     {
       date: "December 20, 2025",
       title: "Upcoming Christmas Mission",
       desc: "Bringing the joy of Christmas to the children.",
       img: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=800&auto=format&fit=crop",
+      gallery: [],
     },
   ];
 
@@ -526,7 +576,7 @@ const App = () => {
               Our Journey & Upcoming Trips
             </h2>
             <p className="text-slate-500 mt-2">
-              Mission Highlights & Future Dates
+              Click on a trip to view photos!
             </p>
           </div>
 
@@ -553,7 +603,10 @@ const App = () => {
                         index % 2 !== 0 ? "md:text-left md:pl-12 md:pr-0" : ""
                       }`}
                     >
-                      <div className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                      <div
+                        className="bg-white p-5 rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer group relative overflow-hidden"
+                        onClick={() => setSelectedTrip(trip)}
+                      >
                         <span className="text-amber-600 font-bold text-sm tracking-wide block mb-1">
                           {trip.date}
                         </span>
@@ -563,13 +616,20 @@ const App = () => {
                         <p className="text-slate-600 text-sm mb-3">
                           {trip.desc}
                         </p>
+
                         {/* Placeholder for actual photo from flyer */}
-                        <div className="w-full h-40 bg-slate-200 rounded-lg overflow-hidden">
+                        <div className="w-full h-40 bg-slate-200 rounded-lg overflow-hidden relative">
                           <img
                             src={trip.img}
                             alt={trip.title}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
+                          {/* Overlay on Hover */}
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                            <span className="flex items-center gap-2 font-semibold">
+                              <Camera size={18} /> View Gallery
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -583,6 +643,64 @@ const App = () => {
           </div>
         </div>
       </section>
+
+      {/* Gallery Modal */}
+      {selectedTrip && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setSelectedTrip(null)}
+          ></div>
+          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden relative z-10 flex flex-col shadow-2xl animate-in fade-in zoom-in duration-300">
+            {/* Modal Header */}
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-white">
+              <div>
+                <span className="text-amber-600 font-bold text-sm tracking-wide uppercase">
+                  {selectedTrip.date}
+                </span>
+                <h3 className="text-2xl font-serif font-bold text-slate-800">
+                  {selectedTrip.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedTrip(null)}
+                className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500 hover:text-slate-800"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Modal Content - Scrollable Grid */}
+            <div className="p-6 overflow-y-auto bg-slate-50">
+              {selectedTrip.gallery && selectedTrip.gallery.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {selectedTrip.gallery.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className="aspect-square bg-slate-200 rounded-xl overflow-hidden shadow-sm group"
+                    >
+                      <img
+                        src={img}
+                        alt={`Gallery ${idx + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-20 text-slate-500">
+                  <Camera size={48} className="mx-auto mb-4 text-slate-300" />
+                  <p>No photos available for this upcoming trip yet.</p>
+                </div>
+              )}
+              <div className="mt-8">
+                <h4 className="font-bold text-slate-800 mb-2">Trip Details</h4>
+                <p className="text-slate-600">{selectedTrip.desc}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* CTA / Donate Section */}
       <section
