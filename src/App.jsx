@@ -636,7 +636,11 @@ const App = () => {
                     <p className="text-slate-300">
                       Next Trip to TJ: December 20, 2025
                     </p>
-                    <button className="mt-2 text-amber-400 hover:text-amber-300 text-sm font-semibold flex items-center gap-1">
+                    {/* Updated Button: Now scrolls to the trips section */}
+                    <button
+                      onClick={() => scrollToSection("trips")}
+                      className="mt-2 text-amber-400 hover:text-amber-300 text-sm font-semibold flex items-center gap-1"
+                    >
                       View Calendar <ArrowRight size={14} />
                     </button>
                   </div>
