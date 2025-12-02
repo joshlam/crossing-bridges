@@ -14,6 +14,7 @@ import {
   HandHeart,
   ArrowRight,
   Camera,
+  Play,
 } from "lucide-react";
 
 const App = () => {
@@ -83,6 +84,11 @@ const App = () => {
     }, 3000);
   };
 
+  // Helper to check if a URL is a video
+  const isVideo = (url) => {
+    return url.match(/\.(mp4|webm|ogg)$/i);
+  };
+
   // Navigation Items
   const navItems = [
     { id: "home", label: "Home" },
@@ -105,6 +111,7 @@ const App = () => {
       date: "June 22, 2024",
       title: "The First Crossing",
       desc: "Our ministry came alive! Launching with obedience to God's calling.",
+      // Main cover image for the timeline card
       img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
       gallery: [
         "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop",
@@ -195,7 +202,10 @@ const App = () => {
       title: "Upcoming Christmas Mission",
       desc: "Bringing the joy of Christmas to the children.",
       img: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?q=80&w=800&auto=format&fit=crop",
-      gallery: [],
+      gallery: [
+        // Example of how to add a video:
+        // '/videos/mission-recap.mp4'
+      ],
     },
   ];
 
@@ -674,16 +684,32 @@ const App = () => {
             <div className="p-6 overflow-y-auto bg-slate-50">
               {selectedTrip.gallery && selectedTrip.gallery.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {selectedTrip.gallery.map((img, idx) => (
+                  {selectedTrip.gallery.map((item, idx) => (
                     <div
                       key={idx}
-                      className="aspect-square bg-slate-200 rounded-xl overflow-hidden shadow-sm group"
+                      className="aspect-square bg-slate-200 rounded-xl overflow-hidden shadow-sm group relative"
                     >
-                      <img
-                        src={img}
-                        alt={`Gallery ${idx + 1}`}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
+                      {isVideo(item) ? (
+                        <div className="w-full h-full relative bg-black">
+                          <video
+                            src={item}
+                            className="w-full h-full object-cover"
+                            controls
+                            playsInline
+                            preload="metadata"
+                          />
+                          {/* Video indicator icon (top right) */}
+                          <div className="absolute top-2 right-2 bg-black/50 p-1.5 rounded-full text-white pointer-events-none">
+                            <Play size={14} fill="white" />
+                          </div>
+                        </div>
+                      ) : (
+                        <img
+                          src={item}
+                          alt={`Gallery ${idx + 1}`}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
