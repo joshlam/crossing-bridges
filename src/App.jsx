@@ -19,6 +19,14 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Contact Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [formStatus, setFormStatus] = useState("");
+
   // Smooth scroll handler
   const scrollToSection = (id) => {
     setIsMenuOpen(false);
@@ -34,6 +42,38 @@ const App = () => {
       });
       setActiveSection(id);
     }
+  };
+
+  // Handle Form Input Change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Handle Form Submit
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, message } = formData;
+
+    // Construct mailto link
+    const subject = encodeURIComponent(`New Message from Website: ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+
+    // Open email client
+    window.location.href = `mailto:jzmgarcia@yahoo.com?subject=${subject}&body=${body}`;
+
+    setFormStatus("Opening your email client to send this message...");
+
+    // Reset form after a brief delay
+    setTimeout(() => {
+      setFormData({ name: "", email: "", message: "" });
+      setFormStatus("");
+    }, 3000);
   };
 
   // Navigation Items
@@ -620,15 +660,19 @@ const App = () => {
             {/* Donation / Contact Form Card */}
             <div className="bg-white text-slate-800 rounded-2xl p-8 shadow-2xl">
               <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
-              <form className="space-y-4">
+              <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
                     Name
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
                     placeholder="Your Name"
+                    required
                   />
                 </div>
                 <div>
@@ -637,8 +681,12 @@ const App = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
                     placeholder="your@email.com"
+                    required
                   />
                 </div>
                 <div>
@@ -646,17 +694,26 @@ const App = () => {
                     Message
                   </label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     rows="4"
                     className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
                     placeholder="I'd like to volunteer..."
+                    required
                   ></textarea>
                 </div>
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-lg transition-colors shadow-lg"
                 >
                   Send Message
                 </button>
+                {formStatus && (
+                  <p className="text-center text-sm text-green-600 font-medium mt-2 animate-in fade-in">
+                    {formStatus}
+                  </p>
+                )}
               </form>
 
               <div className="mt-8 pt-6 border-t border-slate-100">
