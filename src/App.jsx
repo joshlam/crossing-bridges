@@ -21,6 +21,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [selectedTrip, setSelectedTrip] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null); // New state for single image view
 
   // Contact Form State
   const [formData, setFormData] = useState({
@@ -964,14 +965,16 @@ const App = () => {
                   {selectedTrip.gallery.map((item, idx) => (
                     <div
                       key={idx}
-                      className="aspect-square bg-slate-200 rounded-xl overflow-hidden shadow-sm group relative"
+                      className="aspect-square bg-slate-200 rounded-xl overflow-hidden shadow-sm group relative cursor-pointer"
+                      onClick={() => setSelectedImage(item)} // Open full image on click
                     >
                       {isVideo(item) ? (
                         <div className="w-full h-full relative bg-black">
                           <video
                             src={item}
                             className="w-full h-full object-cover"
-                            controls
+                            controls={false} // Hide controls in grid preview
+                            muted // Mute in preview
                             playsInline
                             preload="metadata"
                           />
@@ -1001,6 +1004,40 @@ const App = () => {
                 <p className="text-slate-600">{selectedTrip.desc}</p>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Full Screen Image Lightbox */}
+      {selectedImage && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md animate-in fade-in duration-200">
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-[210]"
+          >
+            <X size={32} />
+          </button>
+
+          <div
+            className="w-full h-full flex items-center justify-center p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            {isVideo(selectedImage) ? (
+              <video
+                src={selectedImage}
+                className="max-w-full max-h-[90vh] rounded-lg shadow-2xl"
+                controls
+                autoPlay
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking video controls
+              />
+            ) : (
+              <img
+                src={selectedImage}
+                alt="Full screen view"
+                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
+              />
+            )}
           </div>
         </div>
       )}
