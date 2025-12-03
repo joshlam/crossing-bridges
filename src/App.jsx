@@ -618,7 +618,7 @@ const App = () => {
                 </button>
               ))}
               <button
-                onClick={() => scrollToSection("contact")}
+                onClick={() => scrollToSection("donate")}
                 className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors shadow-sm"
               >
                 Donate
@@ -651,7 +651,7 @@ const App = () => {
                 </button>
               ))}
               <button
-                onClick={() => scrollToSection("contact")}
+                onClick={() => scrollToSection("donate")}
                 className="w-full mt-2 bg-amber-500 text-white px-3 py-3 rounded-md text-base font-medium"
               >
                 Donate Now
@@ -1280,7 +1280,7 @@ const App = () => {
                 )}
               </form>
 
-              <div className="mt-8 pt-6 border-t border-slate-100">
+              <div id="donate" className="mt-8 pt-6 border-t border-slate-100">
                 <p className="text-center text-sm font-semibold text-slate-500 mb-3">
                   Support the Mission
                 </p>
