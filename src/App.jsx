@@ -686,7 +686,8 @@ const App = () => {
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-100 mb-10 font-light">
               "Pure and undefiled religion before God and the Father is this: to
-              visit orphans and widows in their trouble..."
+              visit orphans and widows in their trouble and to keep oneself
+              unspotted from the world."
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
