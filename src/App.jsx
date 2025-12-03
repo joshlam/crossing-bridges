@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Heart,
   Users,
@@ -24,9 +24,9 @@ const App = () => {
   const [selectedTrip, setSelectedTrip] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null); // New state for single image view
 
-  // Touch state for swipe detection
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
+  // Touch refs for swipe detection (refs update synchronously, avoiding stale state issues)
+  const touchStartRef = useRef(null);
+  const touchEndRef = useRef(null);
 
   // Contact Form State
   const [formData, setFormData] = useState({
@@ -142,18 +142,18 @@ const App = () => {
 
   // Touch Event Handlers for Swipe
   const onTouchStart = (e) => {
-    setTouchEnd(null); // Reset touch end
-    setTouchStart(e.targetTouches[0].clientX);
+    touchEndRef.current = null; // Reset touch end
+    touchStartRef.current = e.targetTouches[0].clientX;
   };
 
   const onTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    touchEndRef.current = e.targetTouches[0].clientX;
   };
 
   const onTouchEnd = () => {
-    if (touchStart === null || touchEnd === null) return;
+    if (touchStartRef.current === null || touchEndRef.current === null) return;
 
-    const distance = touchStart - touchEnd;
+    const distance = touchStartRef.current - touchEndRef.current;
     const minSwipeDistance = 50;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
@@ -164,6 +164,10 @@ const App = () => {
     if (isRightSwipe) {
       handlePrevImage();
     }
+
+    // Reset refs after processing
+    touchStartRef.current = null;
+    touchEndRef.current = null;
   };
 
   // Navigation Items
