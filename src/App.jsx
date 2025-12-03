@@ -9,6 +9,7 @@ import {
   Menu,
   X,
   ChevronRight,
+  ChevronLeft,
   Gift,
   Music,
   HandHeart,
@@ -22,6 +23,10 @@ const App = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [selectedTrip, setSelectedTrip] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null); // New state for single image view
+
+  // Touch state for swipe detection
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
   // Contact Form State
   const [formData, setFormData] = useState({
@@ -88,6 +93,64 @@ const App = () => {
   // Helper to check if a URL is a video
   const isVideo = (url) => {
     return url.match(/\.(mp4|webm|ogg)$/i);
+  };
+
+  // Navigation Logic for Lightbox
+  const handleNextImage = (e) => {
+    e?.stopPropagation();
+    if (!selectedTrip || !selectedImage) return;
+    const currentIndex = selectedTrip.gallery.indexOf(selectedImage);
+    const nextIndex = (currentIndex + 1) % selectedTrip.gallery.length;
+    setSelectedImage(selectedTrip.gallery[nextIndex]);
+  };
+
+  const handlePrevImage = (e) => {
+    e?.stopPropagation();
+    if (!selectedTrip || !selectedImage) return;
+    const currentIndex = selectedTrip.gallery.indexOf(selectedImage);
+    const prevIndex =
+      (currentIndex - 1 + selectedTrip.gallery.length) %
+      selectedTrip.gallery.length;
+    setSelectedImage(selectedTrip.gallery[prevIndex]);
+  };
+
+  // Keyboard Event Listener
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!selectedImage) return;
+      if (e.key === "ArrowRight") handleNextImage();
+      if (e.key === "ArrowLeft") handlePrevImage();
+      if (e.key === "Escape") setSelectedImage(null);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedImage, selectedTrip]);
+
+  // Touch Event Handlers for Swipe
+  const onTouchStart = (e) => {
+    setTouchEnd(null); // Reset touch end
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const minSwipeDistance = 50;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      handleNextImage();
+    }
+    if (isRightSwipe) {
+      handlePrevImage();
+    }
   };
 
   // Navigation Items
@@ -1010,7 +1073,13 @@ const App = () => {
 
       {/* Full Screen Image Lightbox */}
       {selectedImage && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md animate-in fade-in duration-200">
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md animate-in fade-in duration-200"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          {/* Close Button */}
           <button
             onClick={() => setSelectedImage(null)}
             className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-[210]"
@@ -1018,8 +1087,24 @@ const App = () => {
             <X size={32} />
           </button>
 
+          {/* Prev Button (Desktop) */}
+          <button
+            onClick={handlePrevImage}
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-[210] hidden md:block"
+          >
+            <ChevronLeft size={32} />
+          </button>
+
+          {/* Next Button (Desktop) */}
+          <button
+            onClick={handleNextImage}
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-[210] hidden md:block"
+          >
+            <ChevronRight size={32} />
+          </button>
+
           <div
-            className="w-full h-full flex items-center justify-center p-4"
+            className="w-full h-full flex items-center justify-center p-4 md:px-16"
             onClick={() => setSelectedImage(null)}
           >
             {isVideo(selectedImage) ? (
@@ -1034,7 +1119,7 @@ const App = () => {
               <img
                 src={selectedImage}
                 alt="Full screen view"
-                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl select-none"
                 onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
               />
             )}
