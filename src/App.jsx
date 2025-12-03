@@ -117,9 +117,22 @@ const App = () => {
   // Keyboard Event Listener
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (!selectedImage) return;
-      if (e.key === "ArrowRight") handleNextImage();
-      if (e.key === "ArrowLeft") handlePrevImage();
+      if (!selectedImage || !selectedTrip) return;
+
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        const currentIndex = selectedTrip.gallery.indexOf(selectedImage);
+        const nextIndex = (currentIndex + 1) % selectedTrip.gallery.length;
+        setSelectedImage(selectedTrip.gallery[nextIndex]);
+      }
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        const currentIndex = selectedTrip.gallery.indexOf(selectedImage);
+        const prevIndex =
+          (currentIndex - 1 + selectedTrip.gallery.length) %
+          selectedTrip.gallery.length;
+        setSelectedImage(selectedTrip.gallery[prevIndex]);
+      }
       if (e.key === "Escape") setSelectedImage(null);
     };
 
@@ -138,7 +151,7 @@ const App = () => {
   };
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (touchStart === null || touchEnd === null) return;
 
     const distance = touchStart - touchEnd;
     const minSwipeDistance = 50;
@@ -940,6 +953,10 @@ const App = () => {
               {pastTrips.map((trip, index) => (
                 <div
                   key={index}
+                  // Add an ID to the last item so we can scroll to it
+                  id={
+                    index === pastTrips.length - 1 ? "timeline-end" : undefined
+                  }
                   className={`relative flex flex-col md:flex-row gap-8 items-center ${
                     index % 2 !== 0 ? "md:flex-row-reverse" : ""
                   }`}
@@ -1179,9 +1196,9 @@ const App = () => {
                     <p className="text-slate-300">
                       Next Trip to TJ: December 20, 2025
                     </p>
-                    {/* Updated Button: Now scrolls to the trips section */}
+                    {/* Updated Button: Now scrolls to the END of the timeline */}
                     <button
-                      onClick={() => scrollToSection("trips")}
+                      onClick={() => scrollToSection("timeline-end")}
                       className="mt-2 text-amber-400 hover:text-amber-300 text-sm font-semibold flex items-center gap-1"
                     >
                       View Calendar <ArrowRight size={14} />
