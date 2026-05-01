@@ -659,7 +659,7 @@ const App = () => {
     {
       date: "May 2, 2026",
       title: "Upcoming Spring Mission",
-      desc: "Continuing to share God's love with the children.",
+      desc: "",
       img: "/images/gallery/may2026/678321305_122199598706471746_4898492491988676152_n.jpg",
       gallery: [
         "/images/gallery/may2026/678321305_122199598706471746_4898492491988676152_n.jpg",
