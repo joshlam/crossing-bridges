@@ -682,6 +682,15 @@ const App = () => {
         "/images/gallery/may2026/689490403_122200670546471746_8669405564681038616_n.jpg",
       ],
     },
+    {
+      date: "November 14, 2026",
+      title: "Upcoming Thanksgiving Mission",
+      desc: "",
+      img: "/images/gallery/nov2026/678321305_122199598706471746_4898492491988676152_n.jpg",
+      gallery: [
+        "/images/gallery/nov2026/678321305_122199598706471746_4898492491988676152_n.jpg",
+      ],
+    },
   ];
 
   const values = [
