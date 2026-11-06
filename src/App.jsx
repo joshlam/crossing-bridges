@@ -658,11 +658,28 @@ const App = () => {
     },
     {
       date: "May 2, 2026",
-      title: "Upcoming Spring Mission",
-      desc: "",
-      img: "/images/gallery/may2026/678321305_122199598706471746_4898492491988676152_n.jpg",
+      title: "May Mission Trip",
+      desc: "Another joyful day of serving, playing, and praying with the children.",
+      img: "/images/gallery/may2026/686204361_122200670324471746_4297672366971143269_n.jpg",
       gallery: [
-        "/images/gallery/may2026/678321305_122199598706471746_4898492491988676152_n.jpg",
+        "/images/gallery/may2026/686204361_122200670324471746_4297672366971143269_n.jpg",
+        "/images/gallery/may2026/686459180_122200669976471746_2953294709785513662_n.jpg",
+        "/images/gallery/may2026/686553153_122200670228471746_6484430792472866027_n.jpg",
+        "/images/gallery/may2026/686964846_122200669766471746_8475452826148542014_n.jpg",
+        "/images/gallery/may2026/687004694_122200670498471746_4984881264003705193_n.jpg",
+        "/images/gallery/may2026/687014924_122200670084471746_2078661187527840300_n.jpg",
+        "/images/gallery/may2026/687014928_122200669874471746_5920670901995166088_n.jpg",
+        "/images/gallery/may2026/687029312_122200670168471746_3089030223580026779_n.jpg",
+        "/images/gallery/may2026/688234282_122200670132471746_4881100997649021108_n.jpg",
+        "/images/gallery/may2026/689000846_122200670372471746_7406059879595305872_n.jpg",
+        "/images/gallery/may2026/689008345_122200669940471746_7609947507096453587_n.jpg",
+        "/images/gallery/may2026/689012390_122200670420471746_4438097641769611535_n.jpg",
+        "/images/gallery/may2026/689013287_122200670594471746_3762590578740580340_n.jpg",
+        "/images/gallery/may2026/689015809_122200670036471746_4124975231259657251_n.jpg",
+        "/images/gallery/may2026/689015876_122200669814471746_683092667098880812_n.jpg",
+        "/images/gallery/may2026/689016658_122200670276471746_5362172551275957192_n.jpg",
+        "/images/gallery/may2026/689320966_122200669718471746_855784648756866926_n.jpg",
+        "/images/gallery/may2026/689490403_122200670546471746_8669405564681038616_n.jpg",
       ],
     },
   ];
@@ -1299,7 +1316,7 @@ const App = () => {
                   <div>
                     <h4 className="font-bold text-lg">Upcoming Mission</h4>
                     <p className="text-slate-300">
-                      Next Trip to TJ: May 2, 2026
+                      Next Trip to TJ: November 14, 2026
                     </p>
                     {/* Updated Button: Now scrolls to the END of the timeline */}
                     <button
@@ -1389,46 +1406,16 @@ const App = () => {
                 <p className="text-center text-sm font-semibold text-slate-500 mb-3">
                   Support the Mission
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   {/* Zelle (Display Only) */}
                   <div className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors group">
                     <span className="text-xs font-bold text-amber-600 uppercase tracking-wider mb-1">
                       Zelle
                     </span>
                     <span className="font-medium text-slate-800 group-hover:text-amber-600 transition-colors select-all text-sm lg:text-base">
-                      470-484-0033
+                      714-310-6167
                     </span>
                   </div>
-
-                  {/* Venmo Link */}
-                  <a
-                    href="https://venmo.com/Demetree-Fraley"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer group"
-                  >
-                    <span className="text-xs font-bold text-blue-500 uppercase tracking-wider mb-1">
-                      Venmo
-                    </span>
-                    <span className="font-medium text-slate-800 group-hover:text-blue-500 transition-colors select-all text-sm lg:text-base text-center">
-                      Demetree-Fraley
-                    </span>
-                  </a>
-
-                  {/* Cash App Link */}
-                  <a
-                    href="https://cash.app/$DemetreeFraley"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center justify-center p-3 bg-slate-50 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors cursor-pointer group"
-                  >
-                    <span className="text-xs font-bold text-green-600 uppercase tracking-wider mb-1">
-                      Cash App
-                    </span>
-                    <span className="font-medium text-slate-800 group-hover:text-green-600 transition-colors text-sm lg:text-base">
-                      $DemetreeFraley
-                    </span>
-                  </a>
                 </div>
               </div>
             </div>
