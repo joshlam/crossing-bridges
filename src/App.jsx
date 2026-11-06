@@ -560,9 +560,8 @@ const App = () => {
       date: "December 20, 2025",
       title: "Christmas Mission",
       desc: "Brought the joy of Christmas to the children.",
-      img: "/images/gallery/dec2025/591883964_122183248184471746_4323665419668544478_n.jpg",
+      img: "/images/gallery/dec2025/595434759_122185556486471746_8949054677432257853_n.jpg",
       gallery: [
-        "/images/gallery/dec2025/591883964_122183248184471746_4323665419668544478_n.jpg",
         "/images/gallery/dec2025/595434759_122185556486471746_8949054677432257853_n.jpg",
         "/images/gallery/dec2025/599950432_122185557272471746_7646520445583763984_n.jpg",
         "/images/gallery/dec2025/599953075_122185556786471746_219039522190692979_n.jpg",
