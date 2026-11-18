@@ -716,7 +716,9 @@ const App = () => {
       title: "Upcoming Mission",
       desc: "",
       img: "/images/gallery/nov2026/678321305_122199598706471746_4898492491988676152_n.jpg",
-      gallery: [],
+      gallery: [
+        "/images/gallery/nov2026/678321305_122199598706471746_4898492491988676152_n.jpg",
+      ],
     },
   ];
 
