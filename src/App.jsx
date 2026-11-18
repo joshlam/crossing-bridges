@@ -683,12 +683,40 @@ const App = () => {
     },
     {
       date: "November 14, 2026",
-      title: "Upcoming Thanksgiving Mission",
+      title: "Thanksgiving Mission",
+      desc: "We gathered to share God's provision with the children, giving thanks together.",
+      img: "/images/gallery/nov2026/IMG_8360.jpeg",
+      gallery: [
+        "/images/gallery/nov2026/IMG_8360.jpeg",
+        "/images/gallery/nov2026/IMG_8361.mp4",
+        "/images/gallery/nov2026/IMG_8368.jpeg",
+        "/images/gallery/nov2026/IMG_8372.jpeg",
+        "/images/gallery/nov2026/IMG_8373.jpeg",
+        "/images/gallery/nov2026/IMG_8374.jpeg",
+        "/images/gallery/nov2026/IMG_8375.jpeg",
+        "/images/gallery/nov2026/IMG_8377.jpeg",
+        "/images/gallery/nov2026/IMG_8379.jpeg",
+        "/images/gallery/nov2026/IMG_8382.jpeg",
+        "/images/gallery/nov2026/IMG_8383.jpeg",
+        "/images/gallery/nov2026/IMG_8390.mp4",
+        "/images/gallery/nov2026/IMG_8391.jpeg",
+        "/images/gallery/nov2026/IMG_8400.jpeg",
+        "/images/gallery/nov2026/IMG_8409.jpeg",
+        "/images/gallery/nov2026/IMG_8411.mp4",
+        "/images/gallery/nov2026/IMG_8412.jpeg",
+        "/images/gallery/nov2026/IMG_8413.jpeg",
+        "/images/gallery/nov2026/IMG_8418.jpeg",
+        "/images/gallery/nov2026/IMG_8420.jpeg",
+        "/images/gallery/nov2026/IMG_8424.jpeg",
+        "/images/gallery/nov2026/IMG_8436.JPEG",
+      ],
+    },
+    {
+      date: "To be announced",
+      title: "Upcoming Mission",
       desc: "",
       img: "/images/gallery/nov2026/678321305_122199598706471746_4898492491988676152_n.jpg",
-      gallery: [
-        "/images/gallery/nov2026/678321305_122199598706471746_4898492491988676152_n.jpg",
-      ],
+      gallery: [],
     },
   ];
 
@@ -1324,7 +1352,7 @@ const App = () => {
                   <div>
                     <h4 className="font-bold text-lg">Upcoming Mission</h4>
                     <p className="text-slate-300">
-                      Next Trip to TJ: November 14, 2026
+                      Partner with us
                     </p>
                     {/* Updated Button: Now scrolls to the END of the timeline */}
                     <button
